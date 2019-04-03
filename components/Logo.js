@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 
-const Nav = () => (
+const Logo = () => (
   <View style={styles.flex}>
     <Image
       source={{
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Nav;
+export default Logo;
