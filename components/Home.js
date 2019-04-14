@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
+import { StyleSheet, View, TouchableOpacity, Text } from 'react-native';
+import { LinearGradient } from 'expo';
 
 import Logo from './Logo';
 
@@ -8,44 +9,24 @@ class Home extends Component {
     title: 'Home'
   };
 
-  state = {
-    number: 0,
-    value: '',
-    users: []
-  };
-
-  generate = () => {
-    this.setState({
-      number: Math.floor(Math.random() * 100)
-    });
-  };
-
-  addUser = () => {
-    this.setState({
-      users: [...this.state.users, this.state.value]
-    });
-  };
-
   render() {
     const { navigate } = this.props.navigation;
 
     return (
       <View style={styles.container}>
         <Logo />
-        <View style={styles.item} />
-        <TextInput
-          placeholder="Your name"
-          value={this.state.value}
-          style={styles.input}
-          onChangeText={value => this.setState({ value })}
-          onSubmitEditing={this.addUser}
+        <LinearGradient
+          colors={['#60E6FF', '#58A5FF']}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 1 }}
+          style={styles.item}
         />
-        {this.state.users.map(i => (
-          <Text key={i}>{i}</Text>
-        ))}
-        <Button title="Generate" onPress={this.generate} />
-        <Text>{this.state.number}</Text>
-        <Button title="Profile" onPress={() => navigate('Profile')} />
+        <TouchableOpacity
+          style={styles.btn}
+          onPress={() => navigate('Profile')}
+        >
+          <Text style={styles.text}>Profile</Text>
+        </TouchableOpacity>
       </View>
     );
   }
@@ -60,17 +41,21 @@ const styles = StyleSheet.create({
   item: {
     width: 240,
     height: 280,
-    backgroundColor: '#60D0FE',
     borderRadius: 35,
     marginVertical: 20
   },
-  input: {
-    backgroundColor: 'rgb(230, 236, 240)',
-    fontSize: 15,
+  btn: {
+    backgroundColor: 'transparent',
+    borderWidth: 2,
+    borderColor: '#000',
     paddingHorizontal: 15,
     paddingVertical: 10,
     borderRadius: 50,
-    width: 200
+    width: 140
+  },
+  text: {
+    fontSize: 15,
+    textAlign: 'center'
   }
 });
 
