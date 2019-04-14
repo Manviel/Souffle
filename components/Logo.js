@@ -1,28 +1,30 @@
-import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
 
 const Logo = () => (
   <View style={styles.flex}>
-    <Image
-      source={{
-        uri:
-          "https://facebook.github.io/react-native/img/showcase/adsmanager.png"
-      }}
-      style={styles.img}
-    />
-    <Text style={styles.head}>Native</Text>
+    <View>
+      <Text style={styles.head}>Today</Text>
+      <Text style={styles.today}>{new Date().toDateString()}</Text>
+    </View>
+    <Image source={require('../assets/logo.jpg')} style={styles.img} />
   </View>
 );
 
 const styles = StyleSheet.create({
   flex: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center"
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
   head: {
-    padding: 10,
-    fontSize: 40
+    fontSize: 40,
+    paddingBottom: 5
+  },
+  today: {
+    fontSize: 14,
+    color: '#323232'
   },
   img: {
     height: 40,

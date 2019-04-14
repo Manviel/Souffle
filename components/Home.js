@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { StyleSheet, Text, View, Button, TextInput } from "react-native";
+import React, { Component } from 'react';
+import { StyleSheet, Text, View, Button, TextInput } from 'react-native';
 
-import Logo from "./Logo";
+import Logo from './Logo';
 
 class Home extends Component {
   static navigationOptions = {
-    title: "Home"
+    title: 'Home'
   };
 
   state = {
     number: 0,
-    value: "",
+    value: '',
     users: []
   };
 
@@ -32,6 +32,7 @@ class Home extends Component {
     return (
       <View style={styles.container}>
         <Logo />
+        <View style={styles.item} />
         <TextInput
           placeholder="Your name"
           value={this.state.value}
@@ -42,10 +43,9 @@ class Home extends Component {
         {this.state.users.map(i => (
           <Text key={i}>{i}</Text>
         ))}
-
         <Button title="Generate" onPress={this.generate} />
         <Text>{this.state.number}</Text>
-        <Button title="Profile" onPress={() => navigate("Profile")} />
+        <Button title="Profile" onPress={() => navigate('Profile')} />
       </View>
     );
   }
@@ -54,12 +54,18 @@ class Home extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "space-around"
+    backgroundColor: '#fff',
+    padding: 16
+  },
+  item: {
+    width: 240,
+    height: 280,
+    backgroundColor: '#60D0FE',
+    borderRadius: 35,
+    marginVertical: 20
   },
   input: {
-    backgroundColor: "rgb(230, 236, 240)",
+    backgroundColor: 'rgb(230, 236, 240)',
     fontSize: 15,
     paddingHorizontal: 15,
     paddingVertical: 10,
