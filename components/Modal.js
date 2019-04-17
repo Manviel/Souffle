@@ -1,15 +1,27 @@
 import React, { Component } from "react";
-import { Modal, Button, View, StyleSheet } from "react-native";
+import { Modal, Button, View, StyleSheet, TextInput } from "react-native";
 
-import Logo from "./Logo";
+import { firebase } from "../config/env";
 
 class ModalComponent extends Component {
   state = {
-    modal: false
+    modal: false,
+    title: "",
+    location: "",
+    description: ""
   };
 
   handleModal = () => {
     this.setState({ modal: !this.state.modal });
+  };
+
+  handleSubmit = () => {
+    firebase.ref("/events").push({
+      title: this.state.title,
+      description: this.state.description,
+      location: this.state.location
+    });
+    alert("Success");
   };
 
   render() {
@@ -22,7 +34,25 @@ class ModalComponent extends Component {
           onRequestClose={() => {}}
         >
           <View style={styles.container}>
-            <Logo />
+            <TextInput
+              placeholder="Title"
+              value={this.state.title}
+              style={styles.input}
+              onChangeText={title => this.setState({ title })}
+            />
+            <TextInput
+              placeholder="Description"
+              value={this.state.description}
+              style={styles.input}
+              onChangeText={description => this.setState({ description })}
+            />
+            <TextInput
+              placeholder="Location"
+              value={this.state.location}
+              style={styles.input}
+              onChangeText={location => this.setState({ location })}
+            />
+            <Button title="Submit" onPress={this.handleSubmit} />
             <Button title="Close Modal" onPress={this.handleModal} />
           </View>
         </Modal>
@@ -38,6 +68,14 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "space-around"
+  },
+  input: {
+    backgroundColor: "rgb(230, 236, 240)",
+    fontSize: 15,
+    paddingHorizontal: 15,
+    paddingVertical: 10,
+    borderRadius: 50,
+    width: 200
   }
 });
 
