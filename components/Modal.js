@@ -16,11 +16,15 @@ class ModalComponent extends Component {
   };
 
   handleSubmit = () => {
-    firebase.ref("/events").push({
-      title: this.state.title,
-      description: this.state.description,
-      location: this.state.location
-    });
+    firebase
+      .database()
+      .ref("/events")
+      .push({
+        title: this.state.title,
+        description: this.state.description,
+        location: this.state.location
+      });
+
     alert("Success");
   };
 

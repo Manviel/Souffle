@@ -22,12 +22,15 @@ class Home extends Component {
   };
 
   componentDidMount() {
-    firebase.ref("/events").on("value", snapshot => {
-      let data = snapshot.val();
-      let items = Object.values(data);
+    firebase
+      .database()
+      .ref("/events")
+      .on("value", snapshot => {
+        let data = snapshot.val();
+        let items = Object.values(data);
 
-      this.setState({ events: items });
-    });
+        this.setState({ events: items });
+      });
   }
 
   render() {

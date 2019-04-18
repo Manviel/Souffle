@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { StyleSheet, View, Picker, Button, Text } from "react-native";
 
+import { firebase } from "../config/env";
+
 import ModalComponent from "./Modal";
 
 class Profile extends Component {
@@ -10,8 +12,17 @@ class Profile extends Component {
 
   state = {
     number: 0,
-    lang: "eng"
+    lang: "eng",
+    user: null
   };
+
+  componentDidMount() {
+    firebase.auth().onAuthStateChanged(user => {
+      this.setState({ user });
+
+      this.props.navigation.navigate(user ? "Profile" : "Login");
+    });
+  }
 
   generate = () => {
     this.setState({
@@ -22,6 +33,7 @@ class Profile extends Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text>Hello, {this.state.user.email}</Text>
         <Picker
           style={styles.pick}
           selectedValue={this.state.lang}
