@@ -1,22 +1,24 @@
-import React from 'react';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import React from "react";
+import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 
-const Logo = () => (
+const Logo = props => (
   <View style={styles.flex}>
     <View>
       <Text style={styles.head}>Today</Text>
       <Text style={styles.today}>{new Date().toDateString()}</Text>
     </View>
-    <Image source={require('../assets/logo.jpg')} style={styles.img} />
+    <TouchableOpacity onPress={() => props.navigate("Profile")}>
+      <Image source={require("../assets/logo.jpg")} style={styles.img} />
+    </TouchableOpacity>
   </View>
 );
 
 const styles = StyleSheet.create({
   flex: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
   },
   head: {
     fontSize: 40,
@@ -24,7 +26,7 @@ const styles = StyleSheet.create({
   },
   today: {
     fontSize: 14,
-    color: '#323232'
+    color: "#323232"
   },
   img: {
     height: 40,

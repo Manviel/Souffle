@@ -1,11 +1,5 @@
 import React, { Component } from "react";
-import {
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
-  Text,
-  View
-} from "react-native";
+import { StyleSheet, ScrollView, Text, View } from "react-native";
 import { LinearGradient } from "expo";
 
 import { firebase } from "../config/env";
@@ -37,30 +31,26 @@ class Home extends Component {
     const { navigate } = this.props.navigation;
 
     return (
-      <ScrollView style={styles.container}>
-        <Logo />
-        {this.state.events.map((item, index) => (
-          <LinearGradient
-            key={index}
-            colors={["#60E6FF", "#58A5FF"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.item}
-          >
-            <View style={styles.card}>
-              <Text style={styles.head}>{item.title}</Text>
-              <Text style={styles.short}>{item.location}</Text>
-              <Text>{item.date}</Text>
-            </View>
-          </LinearGradient>
-        ))}
-        <TouchableOpacity
-          style={styles.btn}
-          onPress={() => navigate("Profile")}
-        >
-          <Text style={styles.text}>Profile</Text>
-        </TouchableOpacity>
-      </ScrollView>
+      <View style={styles.container}>
+        <Logo navigate={navigate} />
+        <ScrollView horizontal={true}>
+          {this.state.events.map((item, index) => (
+            <LinearGradient
+              key={index}
+              colors={["#60E6FF", "#58A5FF"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 1 }}
+              style={styles.item}
+            >
+              <View style={styles.card}>
+                <Text style={styles.head}>{item.title}</Text>
+                <Text style={styles.short}>{item.location}</Text>
+                <Text>{item.date}</Text>
+              </View>
+            </LinearGradient>
+          ))}
+        </ScrollView>
+      </View>
     );
   }
 }
@@ -75,16 +65,8 @@ const styles = StyleSheet.create({
     width: 240,
     height: 280,
     borderRadius: 35,
-    marginVertical: 20
-  },
-  btn: {
-    backgroundColor: "transparent",
-    borderWidth: 2,
-    borderColor: "#000",
-    paddingHorizontal: 15,
-    paddingVertical: 10,
-    borderRadius: 50,
-    width: 140
+    marginVertical: 20,
+    marginRight: 10
   },
   card: {
     padding: 20
@@ -98,10 +80,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 14,
     marginVertical: 10
-  },
-  text: {
-    fontSize: 15,
-    textAlign: "center"
   }
 });
 

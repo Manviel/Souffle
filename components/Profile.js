@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Picker, Button, Text } from "react-native";
+import { StyleSheet, View, Picker, Text } from "react-native";
 
 import { firebase } from "../config/env";
 
 import ModalComponent from "./Modal";
+import Button from "./Button";
 
 class Profile extends Component {
   static navigationOptions = {
@@ -30,10 +31,13 @@ class Profile extends Component {
     });
   };
 
+  logOut = () => firebase.auth().signOut();
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Hello, {this.state.user.email}</Text>
+        {this.state.user ? <Text>Hello, {this.state.user.email}</Text> : null}
+        <Button title="Log Out" onPress={this.logOut} />
         <Picker
           style={styles.pick}
           selectedValue={this.state.lang}

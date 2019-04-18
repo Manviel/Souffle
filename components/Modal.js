@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Modal, Button, View, StyleSheet, TextInput } from "react-native";
+import { Modal, View, StyleSheet, TextInput } from "react-native";
 
 import { firebase } from "../config/env";
+
+import Button from "./Button";
 
 class ModalComponent extends Component {
   state = {
@@ -23,9 +25,8 @@ class ModalComponent extends Component {
         title: this.state.title,
         description: this.state.description,
         location: this.state.location
-      });
-
-    alert("Success");
+      })
+      .then(() => alert("Success"));
   };
 
   render() {
