@@ -4,7 +4,7 @@ import { LinearGradient } from "expo";
 
 import { firebase } from "../config/env";
 
-import Logo from "./Logo";
+import Logo from "../components/Logo";
 
 class Home extends Component {
   static navigationOptions = {

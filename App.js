@@ -1,9 +1,9 @@
 import { createStackNavigator, createAppContainer } from "react-navigation";
 
-import Home from "./components/Home";
-import Profile from "./components/Profile";
-import Login from "./components/Login";
-import SignUp from "./components/SignUp";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
+import SignUp from "./pages/SignUp";
 
 const Main = createStackNavigator({
   Home: {

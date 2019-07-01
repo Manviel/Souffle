@@ -3,8 +3,8 @@ import { StyleSheet, View, Picker, Text } from "react-native";
 
 import { firebase } from "../config/env";
 
-import ModalComponent from "./Modal";
-import Button from "./Button";
+import ModalComponent from "../components/Modal";
+import Button from "../components/Button";
 
 class Profile extends Component {
   static navigationOptions = {
