@@ -4,6 +4,7 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
+import Article from "./pages/Article";
 
 const Main = createStackNavigator({
   Home: {
@@ -17,6 +18,9 @@ const Main = createStackNavigator({
   },
   SignUp: {
     screen: SignUp
+  },
+  Article: {
+    screen: Article
   }
 });
 

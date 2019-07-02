@@ -48,7 +48,7 @@ class Profile extends Component {
         </Picker>
         <Button title="Generate" onPress={this.generate} />
         <Text>{this.state.number}</Text>
-        <ModalComponent />
+        <ModalComponent title="Open Modal" />
       </View>
     );
   }

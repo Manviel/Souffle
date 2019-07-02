@@ -61,7 +61,7 @@ class ModalComponent extends Component {
             <Button title="Close Modal" onPress={this.handleModal} />
           </View>
         </Modal>
-        <Button title="Open Modal" onPress={this.handleModal} />
+        <Button title={this.props.title} onPress={this.handleModal} />
       </View>
     );
   }

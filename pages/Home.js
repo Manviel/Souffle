@@ -1,10 +1,18 @@
 import React, { Component } from "react";
-import { StyleSheet, ScrollView, Text, View, Image } from "react-native";
+import {
+  StyleSheet,
+  ScrollView,
+  Text,
+  View,
+  Image,
+  TouchableOpacity
+} from "react-native";
 import { LinearGradient } from "expo";
 
 import { firebase } from "../config/env";
 
 import Logo from "../components/Logo";
+import ModalComponent from "../components/Modal";
 
 class Home extends Component {
   static navigationOptions = {
@@ -33,35 +41,36 @@ class Home extends Component {
         <Logo navigate={this.props.navigation.navigate} />
         <ScrollView horizontal={true}>
           {this.state.events.map((item, index) => (
-            <LinearGradient
+            <TouchableOpacity
               key={index}
-              colors={["#60E6FF", "#58A5FF"]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 1, y: 1 }}
-              style={styles.item}
+              style={styles.card}
+              onPress={() =>
+                this.props.navigation.navigate("Article", {
+                  item: item
+                })
+              }
             >
-              <View style={styles.card}>
+              <LinearGradient
+                colors={["#60E6FF", "#58A5FF"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={styles.item}
+              >
                 <Text style={styles.title}>{item.title}</Text>
                 <Text style={styles.short}>{item.location}</Text>
                 <Text>{item.date}</Text>
-              </View>
-            </LinearGradient>
+                <Image
+                  style={styles.circle}
+                  key={index}
+                  source={{ uri: item.src }}
+                />
+              </LinearGradient>
+            </TouchableOpacity>
           ))}
         </ScrollView>
         <Text style={styles.head}>Trending</Text>
         <Text style={styles.today}>Find your favourites</Text>
-        <ScrollView horizontal={true}>
-          {this.state.events.map((item, index) => (
-            <Image
-              style={styles.circle}
-              key={index}
-              source={{ uri: item.src }}
-            />
-          ))}
-          <View style={styles.add}>
-            <Text style={styles.plus}>+</Text>
-          </View>
-        </ScrollView>
+        <ModalComponent title="Add" />
       </View>
     );
   }
@@ -76,11 +85,11 @@ const styles = StyleSheet.create({
     width: 240,
     height: 280,
     borderRadius: 35,
-    marginVertical: 20,
-    marginRight: 10
+    padding: 20
   },
   card: {
-    padding: 20
+    marginRight: 10,
+    marginVertical: 20
   },
   circle: {
     borderRadius: 35,
@@ -89,19 +98,11 @@ const styles = StyleSheet.create({
     marginRight: 10,
     marginTop: 20
   },
-  add: {
+  flex: {
     display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#494949",
-    borderRadius: 35,
-    height: 50,
-    width: 50,
-    marginTop: 20
-  },
-  plus: {
-    color: "#fff",
-    fontSize: 30
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center"
   },
   title: {
     color: "#fff",
@@ -114,7 +115,8 @@ const styles = StyleSheet.create({
   },
   today: {
     fontSize: 14,
-    color: "#323232"
+    color: "#323232",
+    marginBottom: 15
   },
   short: {
     color: "#fff",
