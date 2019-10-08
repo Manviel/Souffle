@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { Modal, View, StyleSheet, TextInput } from "react-native";
 
-import { firebase } from "../config/env";
-
 import Button from "./Button";
 
 class ModalComponent extends Component {
@@ -18,15 +16,7 @@ class ModalComponent extends Component {
   };
 
   handleSubmit = () => {
-    firebase
-      .database()
-      .ref("/events")
-      .push({
-        title: this.state.title,
-        description: this.state.description,
-        location: this.state.location
-      })
-      .then(() => alert("Success"));
+    alert("Success");
   };
 
   render() {

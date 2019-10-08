@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, TextInput, View, Button } from "react-native";
 
-import { firebase } from "../config/env";
-
 class Login extends Component {
   static navigationOptions = {
     title: "Login"
@@ -15,10 +13,7 @@ class Login extends Component {
   };
 
   handleSubmit = () => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(this.state.email, this.state.password)
-      .then(() => this.props.navigation.navigate("Profile"));
+    this.props.navigation.navigate("Profile");
   };
 
   render() {

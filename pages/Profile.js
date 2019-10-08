@@ -8,8 +8,6 @@ import {
   Animated
 } from "react-native";
 
-import { firebase } from "../config/env";
-
 import ModalComponent from "../components/Modal";
 import Button from "../components/Button";
 import Heart from "../components/Heart";
@@ -29,16 +27,11 @@ class Profile extends Component {
 
   state = {
     hearts: [],
-    lang: "eng",
-    user: null
+    lang: "eng"
   };
 
   componentDidMount() {
-    firebase.auth().onAuthStateChanged(user => {
-      this.setState({ user });
-
-      this.props.navigation.navigate(user ? "Profile" : "Login");
-    });
+    this.props.navigation.navigate("Profile");
   }
 
   generate = () => {
@@ -65,7 +58,7 @@ class Profile extends Component {
     );
   };
 
-  logOut = () => firebase.auth().signOut();
+  logOut = () => alert("Log out");
 
   render() {
     return (

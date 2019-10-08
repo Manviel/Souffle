@@ -7,66 +7,51 @@ import {
   Image,
   TouchableOpacity
 } from "react-native";
-import { LinearGradient } from "expo";
-
-import { firebase } from "../config/env";
 
 import Logo from "../components/Logo";
 import ModalComponent from "../components/Modal";
+
+const events = [
+  {
+    id: 0,
+    title: "Feel It All Around",
+    location: "Washed Out",
+    src:
+      "https://img.discogs.com/lmenmdII4wweyVVI2qoXxQnOdA0=/fit-in/500x500/filters:strip_icc():format(jpeg):mode_rgb():quality(90)/discogs-images/R-2536530-1321560057.jpeg.jpg"
+  }
+];
 
 class Home extends Component {
   static navigationOptions = {
     title: "Home"
   };
 
-  state = {
-    events: []
-  };
-
-  componentDidMount() {
-    firebase
-      .database()
-      .ref("/events")
-      .on("value", snapshot => {
-        let data = snapshot.val();
-        let items = Object.values(data);
-
-        this.setState({ events: items });
-      });
-  }
-
   render() {
     return (
       <View style={styles.container}>
         <Logo navigate={this.props.navigation.navigate} />
         <ScrollView horizontal={true}>
-          {this.state.events.map((item, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.card}
-              onPress={() =>
-                this.props.navigation.navigate("Article", {
-                  item: item
-                })
-              }
-            >
-              <LinearGradient
-                colors={["#60E6FF", "#58A5FF"]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={styles.item}
+          {events.map(item => {
+            return (
+              <TouchableOpacity
+                key={item.id}
+                style={styles.card}
+                onPress={() =>
+                  this.props.navigation.navigate("Article", {
+                    item: item
+                  })
+                }
               >
                 <Text style={styles.title}>{item.title}</Text>
                 <Text style={styles.short}>{item.location}</Text>
-                <Text>{item.date}</Text>
                 <Image
                   style={styles.circle}
-                  key={index}
+                  key={item.id}
                   source={{ uri: item.src }}
                 />
-              </LinearGradient>
-            </TouchableOpacity>
-          ))}
+              </TouchableOpacity>
+            );
+          })}
         </ScrollView>
         <Text style={styles.head}>Trending</Text>
         <Text style={styles.today}>Find your favourites</Text>
@@ -88,8 +73,10 @@ const styles = StyleSheet.create({
     padding: 20
   },
   card: {
+    padding: 20,
     marginRight: 10,
-    marginVertical: 20
+    marginVertical: 20,
+    backgroundColor: "#D7E3EB"
   },
   circle: {
     borderRadius: 35,
@@ -105,7 +92,7 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   title: {
-    color: "#fff",
+    color: "#0F1F2E",
     fontSize: 26,
     fontWeight: "900"
   },
@@ -119,7 +106,7 @@ const styles = StyleSheet.create({
     marginBottom: 15
   },
   short: {
-    color: "#fff",
+    color: "#7F888D",
     fontSize: 14,
     marginVertical: 10
   }
