@@ -1,5 +1,7 @@
-import React, { Component } from "react";
-import { StyleSheet, View, Text } from "react-native";
+import React, { Component, Fragment } from "react";
+import { StyleSheet, View, Text, Image } from "react-native";
+
+import Logo from "../components/Logo";
 
 class Article extends Component {
   static navigationOptions = {
@@ -10,42 +12,67 @@ class Article extends Component {
     const item = this.props.navigation.getParam("item");
 
     return (
-      <View style={styles.container}>
-        <Text style={styles.short}>{item.location}</Text>
-        <Text style={styles.title}>{item.title}</Text>
-        <Text style={styles.card}>{item.description}</Text>
-      </View>
+      <Fragment>
+        <View style={styles.container}>
+          <Text style={styles.head}>Currently Playing</Text>
+          <View style={styles.flex}>
+            <Image
+              style={styles.album}
+              key={item.id}
+              source={{ uri: item.src }}
+            />
+            <View style={styles.info}>
+              <Text style={styles.title}>{item.title}</Text>
+              <Text style={styles.label}>Artist</Text>
+              <Text style={styles.short}>{item.artist}</Text>
+              <Text style={styles.label}>Album</Text>
+              <Text style={styles.short}>{item.album}</Text>
+            </View>
+          </View>
+        </View>
+        <Logo navigate={this.props.navigation.navigate} />
+      </Fragment>
     );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: "#f0f0f0",
-    alignItems: "center",
-    padding: 10
+    backgroundColor: "#F6F8F9",
+    padding: 16
   },
-  short: {
-    backgroundColor: "#FFF5F7",
-    width: "100%",
-    color: "#CC7B8E",
-    fontSize: 14,
-    padding: 20,
-    marginBottom: 15
+  head: {
+    color: "#7D888C",
+    fontSize: 28,
+    marginBottom: 30
+  },
+  album: {
+    borderRadius: 5,
+    height: 130,
+    width: 130
+  },
+  flex: {
+    display: "flex",
+    flexDirection: "row"
+  },
+  info: {
+    marginLeft: 30
   },
   title: {
     fontWeight: "900",
-    backgroundColor: "#feebef",
-    width: "100%",
-    fontSize: 26,
-    padding: 20,
+    color: "#0F1F2E",
+    fontSize: 30,
     marginBottom: 15
   },
-  card: {
-    backgroundColor: "#fff",
-    padding: 20,
-    marginBottom: 15
+  short: {
+    color: "#7F888D",
+    fontSize: 14,
+    marginBottom: 12
+  },
+  label: {
+    color: "#7F888D",
+    fontWeight: "500",
+    marginBottom: 12
   }
 });
 
