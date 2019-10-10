@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import ProgressBar from "./ProgressBar";
@@ -11,11 +11,16 @@ const Logo = props => (
     end={{ x: 1, y: 1 }}
     style={styles.container}
   >
-    <TouchableOpacity onPress={() => props.navigate("Profile")}>
-      <Image source={require("../assets/logo.jpg")} style={styles.img} />
-    </TouchableOpacity>
-    <View>
-      <Text style={styles.head}>Play</Text>
+    <View style={styles.column}>
+      <TouchableOpacity onPress={() => props.navigate("Profile")}>
+        <Image
+          style={styles.play}
+          source={{
+            uri:
+              "https://www.freepngimg.com/thumb/pause_button/25377-7-pause-button-image-thumb.png"
+          }}
+        />
+      </TouchableOpacity>
       <ProgressBar />
     </View>
   </LinearGradient>
@@ -26,19 +31,19 @@ const styles = StyleSheet.create({
     height: 80,
     display: "flex",
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
+    padding: 16
   },
-  head: {
-    fontSize: 40,
-    paddingBottom: 5
+  play: {
+    width: 18,
+    height: 18,
+    marginBottom: 18
   },
-  today: {
-    fontSize: 14,
-    color: "#323232"
-  },
-  img: {
-    height: 28,
-    width: 28
+  column: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    width: "100%"
   }
 });
 
