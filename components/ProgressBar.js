@@ -27,7 +27,7 @@ const ProgressBar = () => {
 
   useInterval(() => {
     if (progress < 100) {
-      setProgress(progress + 5);
+      setProgress(progress + 2);
     }
   }, 1000);
 

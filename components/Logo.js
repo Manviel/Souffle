@@ -1,10 +1,11 @@
 import React from "react";
-import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 
 import ProgressBar from "./ProgressBar";
+import Modal from "./Modal";
 
-const Logo = props => (
+const Logo = () => (
   <LinearGradient
     colors={["#F2EEF1", "#FFFFFF"]}
     start={{ x: 0, y: 0 }}
@@ -12,15 +13,7 @@ const Logo = props => (
     style={styles.container}
   >
     <View style={styles.column}>
-      <TouchableOpacity onPress={() => props.navigate("Profile")}>
-        <Image
-          style={styles.play}
-          source={{
-            uri:
-              "https://www.freepngimg.com/thumb/pause_button/25377-7-pause-button-image-thumb.png"
-          }}
-        />
-      </TouchableOpacity>
+      <Modal title="Queue" />
       <ProgressBar />
     </View>
   </LinearGradient>
@@ -33,11 +26,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     padding: 16
-  },
-  play: {
-    width: 18,
-    height: 18,
-    marginBottom: 18
   },
   column: {
     display: "flex",

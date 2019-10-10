@@ -1,5 +1,13 @@
 import React, { Component } from "react";
-import { Modal, View, StyleSheet, TextInput } from "react-native";
+import {
+  Text,
+  Modal,
+  View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+  Image
+} from "react-native";
 
 import Button from "./Button";
 
@@ -15,10 +23,6 @@ class ModalComponent extends Component {
     this.setState({ modal: !this.state.modal });
   };
 
-  handleSubmit = () => {
-    alert("Success");
-  };
-
   render() {
     return (
       <View>
@@ -29,6 +33,7 @@ class ModalComponent extends Component {
           onRequestClose={() => {}}
         >
           <View style={styles.container}>
+            <Text>{this.props.title}</Text>
             <TextInput
               placeholder="Title"
               value={this.state.title}
@@ -47,11 +52,18 @@ class ModalComponent extends Component {
               style={styles.input}
               onChangeText={location => this.setState({ location })}
             />
-            <Button title="Submit" onPress={this.handleSubmit} />
             <Button title="Close Modal" onPress={this.handleModal} />
           </View>
         </Modal>
-        <Button title={this.props.title} onPress={this.handleModal} />
+        <TouchableOpacity onPress={this.handleModal}>
+          <Image
+            style={styles.play}
+            source={{
+              uri:
+                "https://www.freepngimg.com/thumb/pause_button/25377-7-pause-button-image-thumb.png"
+            }}
+          />
+        </TouchableOpacity>
       </View>
     );
   }
@@ -71,6 +83,11 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 50,
     width: 200
+  },
+  play: {
+    width: 28,
+    height: 28,
+    marginBottom: 18
   }
 });
 
